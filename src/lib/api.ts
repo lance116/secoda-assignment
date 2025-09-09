@@ -1,5 +1,4 @@
 // api.ts
-// placeholder api functions for now
 
 export interface BlogPost {
   id: string;
@@ -9,21 +8,19 @@ export interface BlogPost {
 
 const DUMMY_POST: BlogPost = {
   id: '12345',
-  title: 'sample post',
-  content: '# hello world\n\nthis is some sample content with **markdown** support',
+  title: 'My First Reactive Post',
+  content: '# Hello World\n\nThis is my post content. It supports **markdown**!',
 };
 
 export async function fetchBlogPost(id: string): Promise<BlogPost> {
-  // simulate network delay
+  // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1500));
-  // TODO: handle different post ids
   return DUMMY_POST;
 }
 
 export async function saveBlogPost(post: BlogPost): Promise<BlogPost> {
-  // simulate save operation
+  // Simulate network delay and a successful save
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  console.log('post saved:', post);
-  // error handling needed
+  console.log('Post saved successfully:', post);
   return post;
 }

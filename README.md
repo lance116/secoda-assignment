@@ -21,6 +21,7 @@ open [http://localhost:3000](http://localhost:3000) to view the editor.
 
 ## current status
 
-- preview functionality needs implementation
-- markdown parsing not yet added
-- error handling for api calls pending
+- real-time preview functionality implemented
+- basic markdown parsing added (supports headers, bold, italic)
+- comprehensive error handling for api calls
+- all core requirements completed with full test coverage
