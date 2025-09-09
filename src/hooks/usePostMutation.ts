@@ -12,7 +12,7 @@ export function usePostMutation<TData = BlogPost, TVariables = BlogPost>(
   const queryClient = useQueryClient()
 
   return useMutation<TData, Error, TVariables>({
-    mutationFn: saveBlogPost as (variables: TVariables) => Promise<TData>,
+    mutationFn: (variables: TVariables) => saveBlogPost(variables as BlogPost) as Promise<TData>,
     onSuccess: () => {
       // invalidate and refetch the post data
       queryClient.invalidateQueries({ queryKey: ['blogPost', '12345'] })
