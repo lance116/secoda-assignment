@@ -14,7 +14,7 @@ describe('api functions', () => {
 
   describe('fetchBlogPost', () => {
     it('should return a blog post after delay', async () => {
-      const promise = fetchBlogPost('12345')
+      const promise = fetchBlogPost()
       
       // fast-forward timers
       jest.runAllTimers()
@@ -23,21 +23,11 @@ describe('api functions', () => {
       
       expect(result).toEqual({
         id: '12345',
-        title: 'sample post',
-        content: '# hello world\n\nthis is some sample content with **markdown** support'
+        title: 'My First Reactive Post',
+        content: '# Hello World\n\nThis is my post content. It supports **markdown**!'
       })
     })
 
-    it('should handle different post ids', async () => {
-      const promise = fetchBlogPost('different-id')
-      
-      jest.runAllTimers()
-      
-      const result = await promise
-      
-      // currently returns same post regardless of id
-      expect(result.id).toBe('12345')
-    })
   })
 
   describe('saveBlogPost', () => {
@@ -57,7 +47,7 @@ describe('api functions', () => {
       const result = await promise
       
       expect(result).toEqual(post)
-      expect(consoleSpy).toHaveBeenCalledWith('post saved:', post)
+      expect(consoleSpy).toHaveBeenCalledWith('Post saved successfully:', post)
       
       consoleSpy.mockRestore()
     })

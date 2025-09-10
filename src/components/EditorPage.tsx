@@ -1,34 +1,34 @@
 'use client'
 
 import React, { useState, useRef, useCallback, useEffect } from 'react'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
 import { fetchBlogPost, type BlogPost } from '@/lib/api'
 import { LivePreview } from '@/components/LivePreview'
 import { SaveButton } from '@/components/SaveButton'
 import { usePostMutation } from '@/hooks/usePostMutation'
 
 export function EditorPage() {
-  const queryClient = useQueryClient()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [, forceUpdate] = useState({})
   const isDirtyRef = useRef(false)
   const initializedRef = useRef(false)
 
   // fetch initial post data
   const { data: post, isLoading, error } = useQuery({
     queryKey: ['blogPost', '12345'],
-    queryFn: () => fetchBlogPost('12345'),
+    queryFn: () => fetchBlogPost(),
   })
 
   // save mutation using custom hook
   const saveMutation = usePostMutation<BlogPost, BlogPost>({
     onSuccess: () => {
       isDirtyRef.current = false
+      forceUpdate({})
     },
   })
 
@@ -48,11 +48,13 @@ export function EditorPage() {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
     isDirtyRef.current = true
+    forceUpdate({})
   }
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value)
     isDirtyRef.current = true
+    forceUpdate({})
   }
 
   // initialize form when post data loads (only once)

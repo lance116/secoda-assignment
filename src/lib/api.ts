@@ -12,7 +12,7 @@ const DUMMY_POST: BlogPost = {
   content: '# Hello World\n\nThis is my post content. It supports **markdown**!',
 };
 
-export async function fetchBlogPost(id: string): Promise<BlogPost> {
+export async function fetchBlogPost(): Promise<BlogPost> {
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1500));
   return DUMMY_POST;

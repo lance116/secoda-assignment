@@ -9,6 +9,9 @@ interface SaveButtonProps {
 }
 
 export function SaveButton({ onSave, isDirty, isSaving }: SaveButtonProps) {
+  const buttonText = isSaving ? 'saving...' : 'save post'
+  const showIndicator = isDirty && !isSaving
+
   return (
     <div className="space-y-2">
       <Button 
@@ -16,9 +19,9 @@ export function SaveButton({ onSave, isDirty, isSaving }: SaveButtonProps) {
         onClick={onSave}
         disabled={!isDirty || isSaving}
       >
-        {isSaving ? 'saving...' : 'save post'}
+        {buttonText}
       </Button>
-      {isDirty && (
+      {showIndicator && (
         <div className="flex items-center gap-2 text-sm text-amber-600" data-testid="dirty-indicator">
           <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
           <span>unsaved changes</span>

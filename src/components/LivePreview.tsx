@@ -28,12 +28,12 @@ export const LivePreview = memo(function LivePreview({ title, content }: LivePre
   // memoize the expensive markdown conversion
   const htmlContent = useMemo(() => {
     if (!title.trim() && !content.trim()) {
-      return '<p class="text-gray-500 italic">preview will appear here</p>'
+      return '<p className="text-gray-500 italic">preview will appear here</p>'
     }
     
     let html = ''
     if (title.trim()) {
-      html += `<h1 class="text-2xl font-bold mb-4">${title}</h1>`
+      html += `<h1 className="text-2xl font-bold mb-4">${title}</h1>`
     }
     if (content.trim()) {
       html += convertMarkdownToHtml(content)
